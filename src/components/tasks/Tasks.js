@@ -70,13 +70,25 @@ const Tasks = () => {
         }
     }
 
-    const attachUser = async (taskId, userId, detach) => {
+    const attachUser = async (taskId, user, detach) => {
         try {
-            await axios.patch(serverPath + '/' + taskId, {userId: userId, detach: detach});
-            // getAllTasks();
+            axios.patch(serverPath + '/' + taskId, { userId: user.id, detach: detach });
+            updateTasks(taskId, user, detach);
         } catch (err) {
             console.log(err);
         }
+    }
+
+    const updateTasks = (taskId, user, detach) => {
+        let updatedTasks = [...tasks];
+        const taskInd = updatedTasks.findIndex(t => t.id === taskId);
+        if (detach === 'false') {
+            updatedTasks[taskInd].users.push({ id: user.id, username: user.username });
+        } else {
+            const ind = updatedTasks[taskInd].users.findIndex(u => u.id === user.id);
+            updatedTasks[taskInd].users.splice(ind, 1);
+        }
+        setTasks(updatedTasks);
     }
 
     const openEditDialog = (task) => {
@@ -89,21 +101,41 @@ const Tasks = () => {
         setOpenAttach(true);
     }
 
-    const handleAttachClose = () => {
-        setOpenAttach(false);
-        getAllTasks();
-    }
-
     return (
         <div className='container'>
-            <Button variant="contained" color='primary' onClick={() => setOpenAdd(true)}>Add Task</Button>
-            <TaskAddDialog addTask={addTask} isOpen={openAdd} handleClose={() => setOpenAdd(false)}/>
-            { tasks.length > 0
+            <Button
+                variant="contained"
+                color='primary'
+                onClick={() => setOpenAdd(true)}>Add Task</Button>
+            <TaskAddDialog
+                addTask={addTask}
+                isOpen={openAdd}
+                handleClose={() => setOpenAdd(false)}
+            />
+            {tasks.length > 0
                 ? tasks.map((task) =>
-                    (<Task key={task.id} task={task} onDelete={deleteTask} openEditDialog={openEditDialog} openAttachDialog={openAttachDialog} />))
+                (<Task
+                    key={task.id}
+                    task={task}
+                    onDelete={deleteTask}
+                    openEditDialog={openEditDialog}
+                    openAttachDialog={openAttachDialog} />))
                 : <div className='no-items'> No Tasks Created</div>}
-            {openEdit === true && <TaskEditDialog task={taskToEdit} isOpen={openEdit} handleClose={() => setOpenEdit(false)} update={updateTask}/>}
-            {openAttach === true && <TaskAttachDialog task={taskToAttach} isOpen={openAttach} handleClose={() => setOpenAttach(false)} attach={attachUser} tasks={tasks} setTasks={setTasks}/>}
+            {openEdit === true && <TaskEditDialog
+                task={taskToEdit}
+                isOpen={openEdit}
+                handleClose={() => setOpenEdit(false)}
+                update={updateTask}
+            />}
+            {openAttach === true && <TaskAttachDialog
+                task={taskToAttach}
+                isOpen={openAttach}
+                handleClose={() => setOpenAttach(false)}
+                attach={attachUser}
+                updare
+                tasks={tasks}
+                setTasks={setTasks}
+            />}
         </div>
     )
 }

@@ -72,13 +72,32 @@ const Users = () => {
 
     return (
         <div className='container'>
-            <Button variant="contained" color='primary' onClick={() => setOpen(true)}>Add User</Button>
-            <UserAddDialog addUser={addUser} isOpen={open} handleClose={() => setOpen(false)}/>
+            <Button
+                variant="contained"
+                color='primary'
+                onClick={() => setOpen(true)}>
+                Add User
+            </Button>
+            <UserAddDialog
+                addUser={addUser}
+                isOpen={open}
+                handleClose={() => setOpen(false)}
+            />
             { users.length > 0
-                ? users.map((user, i) => 
-                    (<User key={i} user={user} onDelete={deleteUser} openEditDialog={openEditDialog} />))
+                ? users.map((user, i) =>
+                (<User
+                    key={i}
+                    user={user}
+                    onDelete={deleteUser}
+                    openEditDialog={openEditDialog}
+                />))
                 : <div className='no-items'> No Users Created</div>}
-            {openEdit === true && <UserEditDialog user={userToEdit} isOpen={openEdit} handleClose={() => setOpenEdit(false)} update={updateUser}/>}
+            {openEdit === true && <UserEditDialog
+                user={userToEdit}
+                isOpen={openEdit}
+                handleClose={() => setOpenEdit(false)}
+                update={updateUser}
+            />}
         </div>
     )
 }

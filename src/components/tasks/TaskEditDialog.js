@@ -10,7 +10,6 @@ const TaskEditDialog = ({ task, update, isOpen, handleClose }) => {
     const [header, setHeader] = useState(task.header);
     const [description, setDescription] = useState(task.description);
 
-
     const handleSave = () => {
         update(task.id, header, description);
         handleClose();
@@ -44,12 +43,8 @@ const TaskEditDialog = ({ task, update, isOpen, handleClose }) => {
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} color="secondary">
-                    Cancel
-                        </Button>
-                <Button onClick={handleSave} color="primary">
-                    Save
-                        </Button>
+                <Button onClick={handleClose} color="secondary">Cancel</Button>
+                <Button onClick={handleSave} color="primary">Save</Button>
             </DialogActions>
         </Dialog>
     )

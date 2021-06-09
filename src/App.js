@@ -3,11 +3,10 @@ import Header from './components/Header'
 import Tasks from './components/tasks/Tasks'
 import Users from './components/users/Users'
 
-
 function App() {
   return (
     <div className="app">
-      <Header title='Things To Do' />
+      <Header />
       <div className='content-body'>
         <BrowserRouter>
           <Switch>
@@ -19,6 +18,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

@@ -2,7 +2,8 @@ import { AppBar, Toolbar, Tabs, Tab } from '@material-ui/core'
 import { useState } from 'react'
 
 
-const Header = ({ title }) => {
+const Header = () => {
+    const title = "Things To Do";
     const [value, setValue] = useState(() => {
         if (window.location.pathname === '/tasks')
             return 0;
@@ -26,7 +27,7 @@ const Header = ({ title }) => {
             <Toolbar className='app-bar' variant="regular">
                 <div className='toolbar'>
                     <header>{title}</header>
-                    <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+                    <Tabs value={value} onChange={handleChange}>
                         <Tab label="Tasks" />
                         <Tab label="Users" />
                     </Tabs>
@@ -34,10 +35,6 @@ const Header = ({ title }) => {
             </Toolbar>
         </AppBar>
     );
-}
-
-Header.defaultProps = {
-    title: 'Things To Do'
 }
 
 export default Header

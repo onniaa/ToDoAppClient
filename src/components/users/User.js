@@ -12,8 +12,18 @@ const User = ({ user, onDelete, openEditDialog }) => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button color='primary' variant="contained" onClick={() => openEditDialog(user)} >EDIT</Button>
-                <Button variant="contained" color="secondary" onClick={() => onDelete(user.id)}>Delete</Button>
+                <Button
+                    color='primary'
+                    variant="contained"
+                    onClick={() => openEditDialog(user)}>
+                    EDIT
+                </Button>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => onDelete(user.id)}>
+                    Delete
+                </Button>
             </CardActions>
         </Card>
     )
