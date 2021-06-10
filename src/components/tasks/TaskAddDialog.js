@@ -46,12 +46,13 @@ const TaskAddDialog = ({ addTask, isOpen, handleClose}) => {
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} color="secondary">
-                    Cancel
-                        </Button>
-                <Button onClick={handleAdd} color="primary">
+                <Button onClick={handleClose} color="secondary">Cancel</Button>
+                <Button 
+                    onClick={handleAdd} 
+                    disabled={!header}
+                    color="primary">
                     Add
-                        </Button>
+                </Button>
             </DialogActions>
         </Dialog>
     )

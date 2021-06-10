@@ -5,12 +5,17 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Button } from '@material-ui/core'
 
+
 const Users = () => {
     const [open, setOpen] = useState(false);
     const [openEdit, setOpenEdit] = useState(false);
     const [userToEdit, setUserToEdit] = useState();
     const [users, setUsers] = useState([]);
-    const serverPathUsers = `http://localhost:8082/users`
+
+    const serverUsersUrl = `http://localhost:8082/users`
+    // const serverUsersUrl = `https://fee7317a0037.ngrok.io/users`
+
+    console.log(serverUsersUrl);
 
     useEffect(() => {
         getAllUsers();
@@ -18,7 +23,7 @@ const Users = () => {
 
     async function getAllUsers() {
         try {
-            const { data } = await axios.get(serverPathUsers);
+            const { data } = await axios.get(serverUsersUrl);
             console.log(data)
             setUsers(data);
         } catch (err) {
@@ -36,7 +41,7 @@ const Users = () => {
     }
 
     async function deleteUserFromDB(id) {
-        await axios.delete(serverPathUsers + '/' + id);
+        await axios.delete(serverUsersUrl + '/' + id);
     }
 
     const updateUser = async (id, username, email) => {
@@ -49,11 +54,11 @@ const Users = () => {
     }
 
     const updateUserInDB = async (id, username, email) => {
-        await axios.put(serverPathUsers + '/' + id, { username: username, email: email });
+        await axios.put(serverUsersUrl + '/' + id, { username: username, email: email });
     }
 
     const addUserToDB = async (username, email) => {
-        await axios.post(serverPathUsers, { username: username, email: email });
+        await axios.post(serverUsersUrl, { username: username, email: email });
     }
 
     const addUser = async (username, email) => {

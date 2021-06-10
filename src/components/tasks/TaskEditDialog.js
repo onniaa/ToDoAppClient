@@ -43,8 +43,17 @@ const TaskEditDialog = ({ task, update, isOpen, handleClose }) => {
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} color="secondary">Cancel</Button>
-                <Button onClick={handleSave} color="primary">Save</Button>
+                <Button 
+                    onClick={handleClose} 
+                    color="secondary">
+                    Cancel
+                </Button>
+                <Button 
+                    onClick={handleSave} 
+                    disabled={!header}
+                    color="primary">
+                    Save
+                </Button>
             </DialogActions>
         </Dialog>
     )

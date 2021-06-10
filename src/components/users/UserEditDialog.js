@@ -42,8 +42,17 @@ const UserEditDialog = ({ user, update, isOpen, handleClose }) => {
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} color="secondary">Cancel</Button>
-                <Button onClick={handleSave} color="primary">Save</Button>
+                <Button 
+                    onClick={handleClose} 
+                    color="secondary">
+                    Cancel
+                </Button>
+                <Button 
+                    onClick={handleSave}
+                    disabled={!email || !username}
+                    color="primary">
+                    Save
+                </Button>
             </DialogActions>
         </Dialog>
     )

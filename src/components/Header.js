@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 const Header = () => {
     const title = "Things To Do";
+    
     const [value, setValue] = useState(() => {
         if (window.location.pathname === '/tasks')
             return 0;

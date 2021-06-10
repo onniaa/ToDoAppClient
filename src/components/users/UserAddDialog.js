@@ -44,8 +44,17 @@ const UserAddDialog = ({ addUser, isOpen, handleClose }) => {
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} color="secondary">Cancel</Button>
-                <Button onClick={handleAdd} color="primary">Add</Button>
+                <Button 
+                    onClick={handleClose}
+                    color="secondary">
+                    Cancel
+                </Button>
+                <Button 
+                    onClick={handleAdd}
+                    disabled={!email || !username}
+                    color="primary">
+                    Add
+                </Button>
             </DialogActions>
         </Dialog>
     )

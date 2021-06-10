@@ -14,7 +14,8 @@ const Tasks = () => {
     const [openAttach, setOpenAttach] = useState(false);
     const [taskToAttach, setTaskToAttach] = useState();
 
-    const serverPath = `http://localhost:8082/tasks`
+    const serverTasksUrl = `http://localhost:8082/tasks`
+    // const serverTasksUrl = `https://fee7317a0037.ngrok.io/tasks`
 
     useEffect(() => {
         getAllTasks();
@@ -31,12 +32,12 @@ const Tasks = () => {
     }
 
     async function deleteTaskFromDB(id) {
-        await axios.delete(serverPath + '/' + id);
+        await axios.delete(serverTasksUrl + '/' + id);
     }
 
     async function getAllTasks() {
         try {
-            const { data } = await axios.get(serverPath);
+            const { data } = await axios.get(serverTasksUrl);
             console.log(data)
             setTasks(data);
         } catch (err) {
@@ -54,11 +55,11 @@ const Tasks = () => {
     }
 
     const updateTaskInDB = async (id, header, description) => {
-        await axios.put(serverPath + '/' + id, { header: header, description: description });
+        await axios.put(serverTasksUrl + '/' + id, { header: header, description: description });
     }
 
     const addTaskToDB = async (header, description) => {
-        await axios.post(serverPath, { header: header, description: description });
+        await axios.post(serverTasksUrl, { header: header, description: description });
     }
 
     const addTask = async (header, description) => {
@@ -72,7 +73,7 @@ const Tasks = () => {
 
     const attachUser = async (taskId, user, detach) => {
         try {
-            axios.patch(serverPath + '/' + taskId, { userId: user.id, detach: detach });
+            axios.patch(serverTasksUrl + '/' + taskId, { userId: user.id, detach: detach });
             updateTasks(taskId, user, detach);
         } catch (err) {
             console.log(err);
